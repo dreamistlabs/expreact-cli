@@ -5,7 +5,7 @@ var shell = require('shelljs');
 program
   .version('0.0.1')
   .arguments('<dir>')
-  .usage('<dir> [options]')
+  .usage('[options] <dir>')
   .action(function(dir) {
     shell.exec('create-react-app ' + dir);
   })
