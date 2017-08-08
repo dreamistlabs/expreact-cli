@@ -7,6 +7,7 @@ program
   .arguments('<dir>')
   .usage('[options] <dir>')
   .action(function(dir) {
-    shell.exec('create-react-app ' + dir);
+    console.log(dir);
+    // shell.exec('create-react-app ' + dir);
   })
   .parse(process.argv);
