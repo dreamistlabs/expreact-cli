@@ -1,0 +1,11 @@
+{
+  "name": "expreact-cli",
+  "version": "0.0.1",
+  "description": "Command line interface for setting up a boilerplate application powered by React and Express.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Johnny Hu",
+  "license": "MIT"
+}
