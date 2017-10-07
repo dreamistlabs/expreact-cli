@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 var program = require('commander');
 var shell = require('shelljs');
+var child_process = require('child_process');
 
 program
   .version('0.0.1')
@@ -10,9 +11,16 @@ program
     console.log('express ' + dir);
     // shell.exec('express ' + dir);
 
+    shell.exec('prettier -v', function(code, stdout) {
+      if(stdout > 0) {
+        console.log(stdout);
+      }
+    });
+    
     // simulate express folder creation
     shell.mkdir(dir);
     shell.cd(dir);
+
     // simulate dependencies installation
     // shell.exec('npm install');
 
