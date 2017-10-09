@@ -8,18 +8,21 @@ program
   .arguments('<dir>')
   .usage('[options] <dir>')
   .action(function(dir) {
-    console.log('express ' + dir);
-    // shell.exec('express ' + dir);
+    const location = shell.exec('which expreact', {silent: true})
+                          .stdout
+                          .trim()
+                          .replace(/(\/\w+){2}$/, '');
 
-    shell.exec('prettier -v', function(code, stdout) {
-      if(stdout > 0) {
-        console.log(stdout);
-      }
-    });
-    
+    const PATH = location + '/lib/node_modules/expreact-cli';
+
+    // shell.exec('express ' + dir);
     // simulate express folder creation
     shell.mkdir(dir);
+
     shell.cd(dir);
+
+    // initialize a new npm package.json
+    // child_process.execSync('npm init', {stdio: 'inherit'});
 
     // simulate dependencies installation
     // shell.exec('npm install');
@@ -39,10 +42,8 @@ program
     // copy files over
     // replace users.js with modified one to include sample data
     shell.mkdir('routes');
-    shell.cp('-R', '../lib/express/*', './routes');
+    shell.cp('-R', PATH + '/lib/express/*', './routes');
 
-  })
-  .action(function(dir) {
     console.log('create-react-app ' + dir + '/react-ui');
     // shell.exec('create-react-app ' + dir + '/react-ui');
 
@@ -63,7 +64,7 @@ program
     shell.rm('-R', './react-ui/src/App.*');
 
     // copy modified components folder over
-    shell.cp('-R', '../lib/react/components', './react-ui/src/');
+    shell.cp('-R', PATH + '/lib/react/components', './react-ui/src/');
 
     // update index.js with new path to App.js
     shell.sed('-i', "import App from './App';", "import App from './components/App';", './react-ui/src/index.js')
