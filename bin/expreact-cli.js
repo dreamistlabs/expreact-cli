@@ -13,7 +13,7 @@ program
                           .trim()
                           .replace(/(\/\w+){2}$/, '');
 
-    const PATH = location + '/lib/node_modules/expreact-cli';
+    const PATH = location + '/files/node_modules/expreact-cli';
     const reactDirectory = reactDir ? reactDir : 'react-ui';
     console.log(reactDirectory);
 
@@ -46,7 +46,7 @@ program
     // copy files over
     // replace users.js with modified one to include sample data
     shell.mkdir('routes');
-    shell.cp('-R', PATH + '/lib/express/*', './routes');
+    shell.cp('-R', PATH + '/files/express/*', './routes');
 
     console.log('create-react-app ' + dir + '/' + reactDirectory);
     // shell.exec('create-react-app ' + dir + '/react-ui');
@@ -68,7 +68,7 @@ program
     shell.rm('-R', './' + reactDirectory + '/src/App.*');
 
     // copy modified components folder over
-    shell.cp('-R', PATH + '/lib/react/components', './' + reactDirectory + '/src/');
+    shell.cp('-R', PATH + '/files/react/components', './' + reactDirectory + '/src/');
 
     // update index.js with new path to App.js
     shell.sed('-i', "import App from './App';", "import App from './components/App';", './' + reactDirectory + '/src/index.js')
